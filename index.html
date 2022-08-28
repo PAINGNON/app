@@ -46,6 +46,37 @@
       text-align: center;
       color:rgb(60, 179, 113);
       }
+
+
+
+
+	#currency-one,#amount-one {
+		border:0;
+    	background: transparent;
+   	 	font-size:16px;
+    	
+		appearance: none;
+}
+
+#currency-two {
+		appearance: none;
+}
+
+#rate {
+      font-size: 13px;
+      text-align: center;
+      color:rgb(60, 179, 113);
+      }
+
+
+
+
+
+
+
+
+
+
     
 </style>
 </head>
@@ -76,26 +107,25 @@
 		</div>
 </nav>
 
+
+<div class="rate mb-1 mt-5" id="rate">อัตราการแลกเปลี่ยน</div>
 			<div id="para0">
-        	
-            <div class="rate" id="rate">อัตราการแลกเปลี่ยน</div>
-			   
         <div class="justify-content-center input-group mb-3 mt-3">
-  				<select class="input-group-text" id="currency-one">
-  					<option value="THB">THB</option>
-					<option value="MMK"selected>MMK</option>       
+  				<select class="input-group-text" id="currency-one" disabled >
+  					<option value="THB"selected>THB</option>
+					<option value="MMK">MMK</option>       
   				</select>
-  				<input type="number" class="input-group-text" id="amount-one" value="100000">
+  				<input  class="input-group-text" id="amount-one" value="1" disabled>
 			  </div>
             
         <div class="justify-content-center input-group mb-3 mt-3">
-  				<select class="input-group-text" id="currency-two">
-  					<option value="THB"selected>THB</option>
-                <option value="MMK">MMK</option>      
+  				<select class="input-group-text" id="currency-two"disabled >
+  					<option value="THB">THB</option>
+                <option value="MMK"selected>MMK</option>      
   				</select>
-  				<input type="number" class="input-group-text" id="amount-two" value="1">
+  				<input type="number" class="input-group-text" id="amount-two" value="100000">
 			  </div>
-				<button type="button" class="btn btn-primary mt-4" id="btn">สลับสกุลเงิน</button>
+				<button type="button" class="btn btn-primary mt-2" id="btn">สลับสกุลเงิน</button>
 			</div>
 
 			<section id="about" class="p-5">
@@ -198,9 +228,9 @@
     	const two = currency_two.value;
     	fetch(`https://paingnon.github.io/data/usd.json`)
     	.then(res=>res.json()).then(data=>{
-        const rate=data.rates[two];
-        rateText.innerText=`1 ${one} = ${rate} ${two}`;
-        amount_two.value=(amount_one.value*rate).toFixed(2);
+        const rate=data.rates[one];
+        rateText.innerText=`1 ${two} = ${rate} ${one}`;
+        amount_one.value=(amount_two.value*rate).toFixed(2);
     		})
 				}
 					swap.addEventListener('click',()=>{
